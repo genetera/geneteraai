@@ -17,11 +17,11 @@
 <img alt="License" src="https://img.shields.io/github/license/genetera/geneteraai?style=for-the-badge" />
   
 </p>
-
+<br />
 <p>
     <a href="https://genetera.com" target="_blank">
       <img
-        src="https://i.postimg.cc/bwjBh47f/genetera17.png"
+        src="https://i.postimg.cc/yYnvMWyc/genetera-pc.jpg"
         alt="Plane Screens"
         width="100%"
       />
