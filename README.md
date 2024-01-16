@@ -10,6 +10,9 @@
 <p align="center"><b>🔥 🔥 Open Source AI-Powered content generator with unique knowledge to your organization's data.</b></p>
 
 <p align="center">
-  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
-  [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)  
+<a href="https://discord.com/invite/A92xrEGCge">
+<img alt="Discord online members" src="https://img.shields.io/github/contributors/genetera/geneteraai?style=for-the-badge" />
+</a>
+<img alt="Commit activity per month" src="https://img.shields.io/github/license/genetera/geneteraai?style=for-the-badge" />
+  
 </p>
