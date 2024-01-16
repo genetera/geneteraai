@@ -7,7 +7,7 @@
 </p>
 
 <h3 align="center"><b>Genetera AI</b></h3>
-<p align="center"><b>🔥 🔥 Open Source AI-Powered content generator with unique knowledge to your organization's data.</b></p>
+<p align="center"><b>🔥 🔥 Open-Source AI-powered content generator equipped with distinctive knowledge tailored to your organization's data.</b></p>
 
 <p align="center">
 <a href='http://makeapullrequest.com'>
