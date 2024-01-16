@@ -17,3 +17,20 @@
 <img alt="License" src="https://img.shields.io/github/license/genetera/geneteraai?style=for-the-badge" />
   
 </p>
+
+<p>
+    <a href="https://genetera.com" target="_blank">
+      <img
+        src="https://i.postimg.cc/bwjBh47f/genetera17.png"
+        alt="Plane Screens"
+        width="100%"
+      />
+    </a>
+</p>
+
+Meet [Genetera](https://genetera.com). An Open-Source AI-powered content generator equipped with distinctive knowledge tailored to your organization's data.
+
+> Genetera is still in its early days, not everything will be perfect. Please let us know of any suggestions, ideas, or bugs that you encounter on  GitHub issues, and we will use your feedback to improve.
+
+## ⚡️ Contributors Quick Start
+
