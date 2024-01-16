@@ -3,6 +3,9 @@ from .views import (
     OrganizationListApiView,
     OrganizationDetailsApiView,
     OrganizationMemberInvitesListApiView,
+    DocumentsListApiView,
+    DocumentsDetailsApiView,
+    DocumentsUploadApiView,
 )
 
 urlpatterns = [
@@ -13,8 +16,23 @@ urlpatterns = [
         name="organization_details",
     ),
     path(
-        "<organization_slug>/invites",
+        "<organization_id>/invites",
         OrganizationMemberInvitesListApiView.as_view(),
         name="organization_member_invites",
+    ),
+    path(
+        "<organization_id>/documents",
+        DocumentsListApiView.as_view(),
+        name="organization_documents",
+    ),
+    path(
+        "<organization_id>/documents/upload",
+        DocumentsUploadApiView.as_view(),
+        name="organization_document_upload",
+    ),
+    path(
+        "<organization_id>/documents/<document_id>",
+        DocumentsDetailsApiView.as_view(),
+        name="organization_document_details",
     ),
 ]

@@ -4,49 +4,60 @@ import Text from "@/components/ui/text";
 import ButtonPrimary from "@/components/ui/buttons/button";
 import ButtonSecondary from "@/components/ui/buttons/button-secondary";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Badge } from "@tremor/react";
-import {
-  PlusCircleIcon,
-  TrashIcon,
-  PencilSquareIcon,
-} from "@heroicons/react/24/outline";
-import { Toast } from "@/helpers/toast";
+import { MultiSelect, MultiSelectItem } from "@tremor/react";
+import { PlusCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { toastify } from "@/helpers/toast";
 import Input from "@/components/ui/input";
 import Select from "@/components/ui/select";
+import LayoutView from "@/components/ui/layout-view";
+
 import OrganizationService from "@/services/organizations";
+import ProjectService from "@/services/project";
+
 import useSWR, { mutate } from "swr";
 import Table from "@/components/ui/table";
-import { IOrganization } from "@/types/organization";
+import { IProject } from "@/types/project";
 import Modal from "@/components/ui/modal";
+import ContentLoader from "@/components/ui/content-loader";
+import NoContent from "@/components/ui/no-content";
 
-import { ORGANIZATIONS_LIST } from "@/constants/fetch-keys";
+import { PROJECTS_LIST } from "@/constants/fetch-keys";
+
+interface IOrganizationList {
+  title: string;
+  value: string;
+}
 
 const Projects = () => {
-  const [orgDeleteShowModal, setOrgDeleteShowModal] = useState<boolean>(false);
-  const [orgIdToDelete, setOrgIdToDelete] = useState<string>("" as string);
-  const [isOrgDeleteLoading, setIsOrgDeleteLoading] = useState<boolean>(false);
-
-  const [orgCreateShowModal, setOrgCreateShowModal] = useState<boolean>(false);
-
-  const organizationsHeaders = [
-    "Organization",
-    "Size",
-    "Role",
-    "Created at",
-    "",
-  ];
-
-  const {
-    data: organizations,
-    isLoading: isOrganizationsLoading,
-    error: organizationsError,
-  } = useSWR<IOrganization[]>(ORGANIZATIONS_LIST, () =>
-    OrganizationService.getOrganizations()
+  const [organizationList, setOrganizationList] = useState<IOrganizationList[]>(
+    [] as IOrganizationList[]
   );
 
-  const defaultValues: Partial<IOrganization> = {
+  const [organizationFilter, setOrganizationFilter] = useState<string[]>(
+    [] as string[]
+  );
+  const [projectDeleteShowModal, setProjectDeleteShowModal] =
+    useState<boolean>(false);
+  const [projectIdToDelete, setProjectIdToDelete] = useState<string>(
+    "" as string
+  );
+  const [isProjectDeleteLoading, setIsProjectDeleteLoading] =
+    useState<boolean>(false);
+
+  const [projectCreateShowModal, setProjectCreateShowModal] =
+    useState<boolean>(false);
+
+  const projectsHeaders = ["Name", "Organization", "Created at", ""];
+
+  const {
+    data: projects,
+    isLoading: isProjectsLoading,
+    error: projectsError,
+  } = useSWR<IProject[]>(PROJECTS_LIST, () => ProjectService.getProjects());
+
+  const defaultValues: Partial<IProject> = {
     name: "",
-    organization_size: "",
+    organization: "",
   };
   const {
     register,
@@ -54,84 +65,105 @@ const Projects = () => {
     reset,
     setError,
     formState: { errors, isSubmitting, isValid, isDirty },
-  } = useForm<Partial<IOrganization>>({
+  } = useForm<Partial<IProject>>({
     defaultValues,
     mode: "onChange",
     reValidateMode: "onChange",
   });
 
   const openDeleteModal = (id: string) => {
-    setOrgIdToDelete(id);
-    setOrgDeleteShowModal(true);
+    setProjectIdToDelete(id);
+    setProjectDeleteShowModal(true);
   };
 
   const closeDeleteModal = () => {
-    setOrgIdToDelete("");
-    setOrgDeleteShowModal(false);
+    setProjectIdToDelete("");
+    setProjectDeleteShowModal(false);
   };
 
   const openCreateModal = () => {
-    setOrgCreateShowModal(true);
+    setProjectCreateShowModal(true);
   };
 
   const closeCreateModal = () => {
-    setOrgCreateShowModal(false);
+    setProjectCreateShowModal(false);
   };
 
-  const handleCreateOrganization: SubmitHandler<
-    Partial<IOrganization>
-  > = async (data) => {
+  const handleCreateProject: SubmitHandler<Partial<IProject>> = async (
+    data
+  ) => {
     try {
-      await OrganizationService.createOrganization(data);
-      mutate<IOrganization[]>(ORGANIZATIONS_LIST);
+      await ProjectService.createProject(data);
+      mutate<IProject[]>(PROJECTS_LIST);
       closeCreateModal();
       reset(defaultValues);
-      Toast.fire({
+      toastify({
         icon: "success",
-        title: "Added successfully.",
+        title: "Project added successfully.",
       });
     } catch (error: any) {
       closeCreateModal();
-      Toast.fire({
+      toastify({
         icon: "error",
         title: error?.error,
       });
     }
   };
 
-  const handleDeleteOrganization = async () => {
-    setIsOrgDeleteLoading(true);
+  const handleDeleteProject = async () => {
+    setIsProjectDeleteLoading(true);
 
     try {
-      await OrganizationService.deleteOrganization(orgIdToDelete);
-      mutate<IOrganization[]>(
-        ORGANIZATIONS_LIST,
+      await ProjectService.deleteProject(projectIdToDelete);
+      mutate<IProject[]>(
+        PROJECTS_LIST,
         (prevData) => {
           if (!prevData) return;
 
-          return prevData.filter(
-            (organization) => organization.id !== orgIdToDelete
-          );
+          return prevData.filter((project) => project.id !== projectIdToDelete);
         },
         false
       );
-      setIsOrgDeleteLoading(false);
+      setIsProjectDeleteLoading(false);
       closeDeleteModal();
       reset(defaultValues);
-      Toast.fire({
+      toastify({
         icon: "success",
-        title: "Deleted successfully.",
+        title: "Project deleted successfully.",
       });
     } catch (error: any) {
-      setIsOrgDeleteLoading(false);
+      setIsProjectDeleteLoading(false);
       closeDeleteModal();
       reset(defaultValues);
-      Toast.fire({
+      toastify({
         icon: "error",
         title: error?.error,
       });
     }
   };
+
+  useEffect(() => {
+    ProjectService.getProjects(organizationFilter).then((response) => {
+      mutate<IProject[]>(
+        PROJECTS_LIST,
+        () => {
+          return response;
+        },
+        false
+      );
+    });
+  }, [organizationFilter]);
+
+  useEffect(() => {
+    (async () => {
+      let data = await OrganizationService.getOrganizations();
+      let organizationData = data.map((organization) => ({
+        title: organization.name,
+        value: organization.id,
+      }));
+      setOrganizationList(organizationData);
+    })();
+  }, []);
 
   return (
     <>
@@ -146,62 +178,79 @@ const Projects = () => {
             </ButtonPrimary>
           </div>
         </div>
-        <div className="mt-5 ">
-          <Input
-            type="text"
-            name="search"
-            id="search"
-            placeholder="Search project"
-          />
+        <div className="flex justify-end w-full">
+          <LayoutView />
         </div>
-
         <div className="mt-5 ">
-          <Table headers={organizationsHeaders}>
-            {organizations?.map((organization, indx) => (
-              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <td className="px-6 py-4 font-bold text-black whitespace-nowrap dark:text-white">
-                  {organization.name}
-                </td>
-                <td className="px-6 py-4">{organization.organization_size}</td>
-                <td className="px-6 py-4">
-                  <Badge size="xs" color="green">
-                    Owner
-                  </Badge>
-                </td>
-                <td className="px-6 py-4">{organization.created_at}</td>
-
-                <td className="px-6 py-4 text-right">
-                  <a
-                    href="#"
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >
-                    <ButtonPrimary
-                      icon={TrashIcon}
-                      color="rose"
-                      size="xs"
-                      onClick={() => openDeleteModal(organization.id)}
-                    ></ButtonPrimary>
-                  </a>
-                </td>
-              </tr>
+          <MultiSelect
+            placeholder="All organizations"
+            value={organizationFilter}
+            onValueChange={setOrganizationFilter}
+          >
+            {organizationList?.map((organization) => (
+              <MultiSelectItem value={organization.value}>
+                {organization.title}
+              </MultiSelectItem>
             ))}
-          </Table>
+          </MultiSelect>
         </div>
+        {isProjectsLoading && <ContentLoader />}
+        {!isProjectsLoading && projects?.length === 0 && <NoContent />}
+        {!isProjectsLoading && projects?.length !== 0 && (
+          <>
+            <div className="mt-5 ">
+              <Table headers={projectsHeaders}>
+                {projects?.map((project, indx) => (
+                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td className="px-6 py-4 font-bold text-black whitespace-nowrap dark:text-white">
+                      {project.name}
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center justify-start">
+                        <div className="flex justify-center items-center bg-green-600 text-white font-semibold w-5 h-5 rounded-md">
+                          {project.organization_name.charAt(0).toUpperCase()}
+                        </div>
+                        <span className="ml-2 font-medium">
+                          {project.organization_name}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">{project.created_at}</td>
+
+                    <td className="px-6 py-4 text-right">
+                      <a
+                        href="#"
+                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >
+                        <ButtonPrimary
+                          icon={TrashIcon}
+                          color="rose"
+                          size="xs"
+                          onClick={() => openDeleteModal(project.id)}
+                        ></ButtonPrimary>
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </Table>
+            </div>
+          </>
+        )}
       </div>
       <Modal
         title=" Delete project"
         description={`Are you sure you want to delete project ${
-          organizations?.find((obj) => obj.id === orgIdToDelete)?.name
+          projects?.find((obj) => obj.id === projectIdToDelete)?.name
         }. Deleting this project will automatically delete all data related to it.`}
-        isOpen={orgDeleteShowModal}
-        handleClose={() => setOrgDeleteShowModal(false)}
+        isOpen={projectDeleteShowModal}
+        handleClose={() => setProjectDeleteShowModal(false)}
       >
         <div className="flex justify-end gap-2 p-4 sm:px-6">
           <ButtonSecondary onClick={closeDeleteModal}>Cancel</ButtonSecondary>
           <ButtonPrimary
-            onClick={handleDeleteOrganization}
+            onClick={handleDeleteProject}
             color="rose"
-            loading={isOrgDeleteLoading}
+            loading={isProjectDeleteLoading}
           >
             Delete
           </ButtonPrimary>
@@ -210,27 +259,23 @@ const Projects = () => {
 
       <Modal
         title=" Create Projects"
-        isOpen={orgCreateShowModal}
-        handleClose={() => setOrgCreateShowModal(false)}
+        isOpen={projectCreateShowModal}
+        handleClose={() => setProjectCreateShowModal(false)}
       >
         <form
           className="space-y-4 md:space-y-6 p-4 sm:px-6"
-          onSubmit={handleSubmit(handleCreateOrganization)}
+          onSubmit={handleSubmit(handleCreateProject)}
         >
           <Select
             label="Organization"
-            options={[
-              { title: "Qurity", value: "tegd-gege" },
-              { title: "Vomaty", value: "5-20" },
-              { title: "Genetera", value: "20-More" },
-            ]}
+            options={organizationList}
             register={register}
-            name="organization_size"
-            id="organization_size"
+            name="organization"
+            id="organization"
             validations={{
               required: "Organization is required",
             }}
-            error={errors.organization_size}
+            error={errors.organization}
           />
           <Input
             label="Project name"

@@ -9,6 +9,8 @@ interface IProps {
   validations?: any;
   register?: UseFormRegister<any>;
   error?: any;
+  disabled?: boolean;
+  autoComplete: "on" | "off";
   className?: string;
   placeholder?: string;
 }
@@ -22,6 +24,8 @@ const Input = (props: IProps) => {
       <input
         type={props.type}
         name={props.name}
+        disabled={props.disabled}
+        autoComplete={props.autoComplete}
         id={props.id}
         placeholder={props.placeholder}
         {...(props.register && props.register(props.name, props.validations))}
@@ -29,7 +33,9 @@ const Input = (props: IProps) => {
           props.register && props.register(props.name).onChange(e);
           props.onChange && props.onChange(e);
         }}
-        className={`"bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+        className={`${
+          props.className ? props.className : ""
+        } " bg-white focus:outline-none border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
         ${props.error ? "border-red-500" : ""}
         `}
       />

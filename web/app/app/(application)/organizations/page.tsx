@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import Text from "@/components/ui/text";
 import ButtonPrimary from "@/components/ui/buttons/button";
 import ButtonSecondary from "@/components/ui/buttons/button-secondary";
@@ -8,9 +9,10 @@ import { Badge } from "@tremor/react";
 import {
   PlusCircleIcon,
   TrashIcon,
-  PencilSquareIcon,
+  EyeIcon,
 } from "@heroicons/react/24/outline";
-import { Toast } from "@/helpers/toast";
+import { toastify } from "@/helpers/toast";
+import LayoutView from "@/components/ui/layout-view";
 import Input from "@/components/ui/input";
 import Select from "@/components/ui/select";
 import OrganizationService from "@/services/organizations";
@@ -18,6 +20,8 @@ import useSWR, { mutate } from "swr";
 import Table from "@/components/ui/table";
 import { IOrganization } from "@/types/organization";
 import Modal from "@/components/ui/modal";
+import ContentLoader from "@/components/ui/content-loader";
+import NoContent from "@/components/ui/no-content";
 
 import { ORGANIZATIONS_LIST } from "@/constants/fetch-keys";
 
@@ -86,13 +90,13 @@ const Organizations = () => {
       mutate<IOrganization[]>(ORGANIZATIONS_LIST);
       closeCreateModal();
       reset(defaultValues);
-      Toast.fire({
+      toastify({
         icon: "success",
         title: "Added successfully.",
       });
     } catch (error: any) {
       closeCreateModal();
-      Toast.fire({
+      toastify({
         icon: "error",
         title: error?.error,
       });
@@ -118,7 +122,7 @@ const Organizations = () => {
       setIsOrgDeleteLoading(false);
       closeDeleteModal();
       reset(defaultValues);
-      Toast.fire({
+      toastify({
         icon: "success",
         title: "Deleted successfully.",
       });
@@ -126,7 +130,7 @@ const Organizations = () => {
       setIsOrgDeleteLoading(false);
       closeDeleteModal();
       reset(defaultValues);
-      Toast.fire({
+      toastify({
         icon: "error",
         title: error?.error,
       });
@@ -146,47 +150,56 @@ const Organizations = () => {
             </ButtonPrimary>
           </div>
         </div>
-        <div className="mt-5 ">
-          <Input
-            type="text"
-            name="search"
-            id="search"
-            placeholder="Search organization"
-          />
-        </div>
 
-        <div className="mt-5 ">
-          <Table headers={organizationsHeaders}>
-            {organizations?.map((organization, indx) => (
-              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <td className="px-6 py-4 font-bold text-black whitespace-nowrap dark:text-white">
-                  {organization.name}
-                </td>
-                <td className="px-6 py-4">{organization.organization_size}</td>
-                <td className="px-6 py-4">
-                  <Badge size="xs" color="green">
-                    Owner
-                  </Badge>
-                </td>
-                <td className="px-6 py-4">{organization.created_at}</td>
+        <LayoutView />
+        {isOrganizationsLoading && <ContentLoader />}
+        {!isOrganizationsLoading && organizations?.length === 0 && (
+          <NoContent />
+        )}
+        {!isOrganizationsLoading && organizations?.length !== 0 && (
+          <>
+            <div className="mt-5 ">
+              <Table headers={organizationsHeaders}>
+                {organizations?.map((organization, indx) => (
+                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 cursor-pointer hover:bg-slate-100">
+                    <td className="px-6 py-4 font-bold text-black whitespace-nowrap dark:text-white">
+                      {organization.name}
+                    </td>
+                    <td className="px-6 py-4">
+                      {organization.organization_size}
+                    </td>
+                    <td className="px-6 py-4">
+                      <Badge size="xs" color="green">
+                        Owner
+                      </Badge>
+                    </td>
+                    <td className="px-6 py-4">{organization.created_at}</td>
 
-                <td className="px-6 py-4 text-right">
-                  <a
-                    href="#"
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >
-                    <ButtonPrimary
-                      icon={TrashIcon}
-                      color="rose"
-                      size="xs"
-                      onClick={() => openDeleteModal(organization.id)}
-                    ></ButtonPrimary>
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </Table>
-        </div>
+                    <td className="px-6 py-4 text-right">
+                      <Link
+                        href={`/app/organizations/${organization.id}`}
+                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >
+                        <ButtonSecondary icon={EyeIcon} size="xs" />
+                      </Link>
+                      <a
+                        href="#"
+                        className="font-medium text-blue-600 ml-2 dark:text-blue-500 hover:underline"
+                      >
+                        <ButtonPrimary
+                          icon={TrashIcon}
+                          color="rose"
+                          size="xs"
+                          onClick={() => openDeleteModal(organization.id)}
+                        ></ButtonPrimary>
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </Table>
+            </div>
+          </>
+        )}
       </div>
       <Modal
         title=" Delete Organization"

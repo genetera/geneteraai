@@ -23,7 +23,7 @@ class Project(models.Model):
         on_delete=models.CASCADE,
         related_name="organization_project",
     )
-    creted_by = models.ForeignKey(
+    created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="project_creator",
@@ -46,7 +46,7 @@ class Project(models.Model):
         return super().save(*args, **kwargs)
 
 
-class ProjectnMember(models.Model):
+class ProjectMember(models.Model):
     id = models.UUIDField(
         default=uuid.uuid4, unique=True, db_index=True, editable=False, primary_key=True
     )

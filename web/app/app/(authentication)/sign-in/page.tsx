@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { RssIcon } from "@heroicons/react/24/outline";
 import ButtonPrimary from "@/components/ui/buttons/button";
 import Input from "@/components/ui/input";
-import { Toast } from "@/helpers/toast";
+import { toastify } from "@/helpers/toast";
 import AuthenticationService from "@/services/authentication";
 
 import { ISignInCredentials } from "@/types/authentication";
@@ -34,15 +34,15 @@ const SignIn = () => {
     console.log(data);
     try {
       await AuthenticationService.signIn(data);
-      Toast.fire({
+      toastify({
         icon: "success",
-        title: "Signed in successfully",
+        title: "Logging you in.",
       });
 
       reset(defaultValues);
       window.location.href = "/app/dashboard/";
     } catch (error: any) {
-      Toast.fire({
+      toastify({
         icon: "error",
         title: error?.error,
       });
@@ -56,9 +56,9 @@ const SignIn = () => {
           credential,
           clientId,
         });
-        Toast.fire({
+        toastify({
           icon: "success",
-          title: "Signed in successfully",
+          title: "Logging you in.",
         });
         window.location.href = "/app/dashboard/";
       } else {
@@ -66,7 +66,7 @@ const SignIn = () => {
       }
     } catch (error) {
       console.log(error);
-      Toast.fire({
+      toastify({
         icon: "error",
         title: "Error signing in!",
       });
@@ -140,7 +140,9 @@ const SignIn = () => {
                     Forgot password?
                   </Link>
                 </div>
-                <ButtonPrimary className="w-full">Sign in</ButtonPrimary>
+                <ButtonPrimary className="w-full">
+                  {isSubmitting ? "Signing in...." : "Sign in"}
+                </ButtonPrimary>
                 <GoogleLoginButton handleSignIn={handleGoogleSignIn} />
 
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">

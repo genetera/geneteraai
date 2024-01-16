@@ -5,9 +5,37 @@
 
 body {
   font-family: "Montserrat", sans-serif;
+  /*
+  background: white;
+  background-image: radial-gradient(rgb(91, 100, 88) 1px, transparent 0);
+  background-size: 40px 40px;
+  background-position: -19px -19px;
+  */
+}
+
+.container-dotted {
+  background: white;
+  background-image: url(https://assets-global.website-files.com/628288c5cd3e8411b90a36a4/65761cbdb9d7afd78bb7a288_Hero-pattern-dots.svg);
+  background-size: 75px;
+  background-position: 50px;
 }
 
 .active {
   background-color: #ebf1ff;
   color: #6083ff;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.markdown p {
+  margin-bottom: 30px;
 }

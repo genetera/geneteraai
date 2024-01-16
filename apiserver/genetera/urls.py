@@ -16,8 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.http import HttpResponse
-from sentry_sdk import capture_exception
 
 
 urlpatterns = [
@@ -25,4 +23,7 @@ urlpatterns = [
     # Modules routing
     path("api/v1/auth/", include("authentication.urls")),
     path("api/v1/organizations/", include("organization.urls")),
+    path("api/v1/projects/", include("project.urls")),
+    path("api/v1/notifications/", include("notification.urls")),
+    path("api/v1/contents/", include("content.urls")),
 ]

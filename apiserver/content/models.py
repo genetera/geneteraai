@@ -15,10 +15,10 @@ class Content(models.Model):
         ("none", "None"),
     )
     STATUS_CHOICES = (
-        ("5", "Published"),
-        ("10", "Done"),
-        ("15", "In progress"),
-        ("20", "Todo"),
+        (5, "Published"),
+        (10, "Done"),
+        (15, "In progress"),
+        (20, "Todo"),
     )
 
     id = models.UUIDField(
@@ -81,6 +81,7 @@ class ContentPlatform(models.Model):
         default=uuid.uuid4, unique=True, db_index=True, editable=False, primary_key=True
     )
     name = models.CharField(max_length=50)
+    url = models.URLField(blank=True, null=True)
     icon = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)

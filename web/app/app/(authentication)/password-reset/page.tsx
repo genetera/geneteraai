@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { RssIcon } from "@heroicons/react/24/outline";
 import ButtonPrimary from "@/components/ui/buttons/button";
 import Input from "@/components/ui/input";
-import { Toast } from "@/helpers/toast";
+import { toastify } from "@/helpers/toast";
 import AuthenticationService from "@/services/authentication";
 import { IForgotPassword } from "@/types/authentication";
 
@@ -30,13 +30,13 @@ const PasswordReset = () => {
   const passwordResetHandler: SubmitHandler<IForgotPassword> = async (data) => {
     try {
       await AuthenticationService.forgotPassword(data);
-      Toast.fire({
+      toastify({
         icon: "success",
         title: "Email sent. Check your email to reset password",
       });
       reset(defaultValues);
     } catch (error: any) {
-      Toast.fire({
+      toastify({
         icon: "error",
         title: error?.error,
       });

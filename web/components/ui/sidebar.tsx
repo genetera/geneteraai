@@ -2,35 +2,36 @@
 
 import React from "react";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 import {
   ChartPieIcon,
-  CogIcon,
-  Cog8ToothIcon,
   BriefcaseIcon,
   BellIcon,
-  LifebuoyIcon,
-  BanknotesIcon,
   BuildingOffice2Icon,
   ArrowLeftOnRectangleIcon,
   RectangleGroupIcon,
+  ChevronUpDownIcon,
+  QueueListIcon,
 } from "@heroicons/react/24/outline";
 import AuthenticationService from "@/services/authentication";
 import Cookies from "js-cookie";
-import { Toast } from "@/helpers/toast";
+import { toastify } from "@/helpers/toast";
 
 const Sidebar = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const signOutHandler = async () => {
     try {
       await AuthenticationService.signOut({
         refresh_token: Cookies.get("refreshToken") as string,
       });
-      Toast.fire({
+      toastify({
         icon: "success",
         title: "Signed out.",
       });
       window.location.href = "/app/sign-in";
     } catch (error: any) {
-      Toast.fire({
+      toastify({
         icon: "error",
         title: "Failed try again.",
       });
@@ -48,7 +49,9 @@ const Sidebar = () => {
             <li>
               <Link
                 href="/app/dashboard/"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group active"
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
+                  pathname.startsWith("/app/dashboard") ? "active" : ""
+                }`}
               >
                 <ChartPieIcon className="w-5 h-5  transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
 
@@ -58,7 +61,9 @@ const Sidebar = () => {
             <li>
               <Link
                 href="/app/projects/"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
+                  pathname.startsWith("/app/projects") ? "active" : ""
+                }`}
               >
                 <BriefcaseIcon className="w-5 h-5  transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
 
@@ -68,7 +73,9 @@ const Sidebar = () => {
             <li>
               <Link
                 href="/app/contents/"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
+                  pathname.startsWith("/app/contents") ? "active" : ""
+                }`}
               >
                 <RectangleGroupIcon className="w-5 h-5  transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
 
@@ -79,7 +86,9 @@ const Sidebar = () => {
             <li>
               <Link
                 href="/app/notifications/"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
+                  pathname.startsWith("/app/notifications") ? "active" : ""
+                }`}
               >
                 <BellIcon className="w-5 h-5  transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
 
@@ -91,11 +100,16 @@ const Sidebar = () => {
             <li className="text-center">
               <Link
                 href="/app/organizations/"
-                className="flex items-center p-2 border border-black border-dashed text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className={`flex items-center justify-between p-2 border border-black border-dashed text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
+                  pathname.startsWith("/app/organizations") ? "active" : ""
+                }`}
               >
-                <BuildingOffice2Icon className="w-5 h-5  transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <div className="flex">
+                  <QueueListIcon className="w-5 h-5  transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
 
-                <span className="ml-3">Organizations</span>
+                  <span className="ml-3">Organizations</span>
+                </div>
+                <ChevronUpDownIcon className="w-5 h-5  transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
               </Link>
             </li>
             <li>

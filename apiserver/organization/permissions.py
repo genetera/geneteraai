@@ -6,7 +6,6 @@ from .constants import ORGANIZATION_ROLES
 
 class IsOrganizationOwnerOrAdmin(BasePermission):
     def has_permission(self, request, view):
-        print(view)
         # For GET, OPTIONS and HEAD Requests grant access
         if request.method in SAFE_METHODS:
             return True
@@ -19,4 +18,13 @@ class IsOrganizationOwnerOrAdmin(BasePermission):
                 ORGANIZATION_ROLES["OWNER"],
                 ORGANIZATION_ROLES["ADMIN"],
             ],
+        )
+
+
+class IsOrganizationMember(BasePermission):
+    def has_permission(self, request, view):
+        # ...Check whether User is member of organization
+        return OrganizationMember.objects.filter(
+            organization__id=view.organization_id,
+            member=request.user,
         )

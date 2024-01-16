@@ -1,12 +1,16 @@
 import ReactWrapBalancer from "react-wrap-balancer";
 import Link from "next/link";
-import { ArrowRightIcon, RssIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowRightIcon,
+  RssIcon,
+  CreditCardIcon,
+} from "@heroicons/react/24/outline";
 import ButtonPrimary from "../ui/buttons/button";
 
 const Hero: React.FC = () => {
   return (
     <section>
-      <header className="absolute z-30 w-full">
+      <header className="fixed z-50 w-full bg-white">
         <div className="max-w-6xl px-4 mx-auto sm:px-6">
           <div className="flex items-center justify-between h-16 md:h-20">
             <Link href="/" className="mr-4 shrink-0 flex ml-2 md:mr-24">
@@ -30,7 +34,7 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </header>
-      <div className="relative max-w-6xl min-h-screen px-4 mx-auto sm:px-6">
+      <div className="relative max-w-6xl px-4 mx-auto sm:px-6 container-dotted">
         <div className="pt-32 pb-16 md:pt-52 md:pb-32">
           {/* Hero content */}
           <div className="container mx-auto text-center">
@@ -53,30 +57,33 @@ const Hero: React.FC = () => {
               data-aos="fade-down"
             >
               <ReactWrapBalancer>
-                AI-Powered content generator.
+                Genetera AI <br /> built for outcomes.
               </ReactWrapBalancer>
             </h1>
             <p
-              className="mb-8 text-lg text-zinc-900"
+              className="mb-8 text-lg text-zinc-600  font-medium"
               data-aos="fade-down"
               data-aos-delay="200"
             >
-              Create viral contents for Instagram, X, Linkedin, Facebook,
-              Articles using LLMs.
+              Elevate productivity saving time in research, <br /> seamlessly
+              managing documents, and swiftly generating content.
             </p>
             <div
               className="flex flex-col items-center max-w-xs mx-auto gap-4 sm:max-w-none  sm:justify-center sm:flex-row sm:inline-flex"
               data-aos="fade-down"
               data-aos-delay="400"
             >
-              <Link href="/app/sign-in/">
-                <ButtonPrimary>
-                  <div className="justify-center items-center flex">
-                    <span>Get Started</span>
-                    <ArrowRightIcon className="w-3 h-3 tracking-normal text-primary-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1" />
-                  </div>
-                </ButtonPrimary>
-              </Link>
+              <div>
+                <Link href="/app/sign-in/">
+                  <ButtonPrimary>
+                    <div className="justify-center items-center flex">
+                      <span>Try for free</span>
+                      <ArrowRightIcon className="w-3 h-3 tracking-normal text-primary-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1" />
+                    </div>
+                  </ButtonPrimary>
+                  <br />
+                </Link>
+              </div>
             </div>
           </div>
         </div>

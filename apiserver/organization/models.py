@@ -1,7 +1,7 @@
 import uuid
 
 from django.db import models
-from django.utils.text import slugify
+from django.contrib.postgres.fields import JSONField
 from django.conf import settings
 
 
@@ -97,4 +97,35 @@ class OrganizationMemberInvite(models.Model):
         verbose_name = "Organization Member Invite"
         verbose_name_plural = "Organization Member Invites"
         db_table = "organization_member_invites"
+        ordering = ("-created_at",)
+
+
+class OrganizationDocument(models.Model):
+    id = models.UUIDField(
+        default=uuid.uuid4, unique=True, db_index=True, editable=False, primary_key=True
+    )
+    name = models.CharField(max_length=255)
+    size = models.CharField(max_length=20)
+    metadata = models.JSONField(null=False, blank=True, default=dict)
+    organization = models.ForeignKey(
+        Organization,
+        on_delete=models.CASCADE,
+        related_name="organization_document",
+    )
+    uploaded_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="creator_organization",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """Returns name of document"""
+        return self.name
+
+    class Meta:
+        verbose_name = "Organization Document"
+        verbose_name_plural = "Organization Documents"
+        db_table = "organization_documents"
         ordering = ("-created_at",)

@@ -6,3 +6,9 @@ export interface IOrganization {
   created_at: string;
   owner: string;
 }
+
+export interface IDocument {
+  id: string;
+  name: string;
+  size: string;
+}

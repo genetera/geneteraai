@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Card, Title, BarChart, LineChart } from "@tremor/react";
+import {
+  Card,
+  Title,
+  BarChart,
+  LineChart,
+  AreaChart,
+  Badge,
+} from "@tremor/react";
 import {
   MultiSelect,
   MultiSelectItem,
@@ -12,75 +19,63 @@ import {
 const data = [
   {
     Month: "Jan",
-    Failed: 2890,
-    Completed: 1400,
-    "In Progress": 4938,
+    Failed: 1200,
+    Published: 1000,
   },
   {
     Month: "Feb",
-    Failed: 1890,
-    Completed: 998,
-    "In Progress": 2938,
+    Failed: 1200,
+    Published: 998,
   },
   {
     Month: "Mar",
-    Failed: 3890,
-    Completed: 2980,
-    "In Progress": 2645,
+    Failed: 1090,
+    Published: 1000,
   },
   {
     Month: "Apr",
-    Failed: 1880,
-    Completed: 978,
-    "In Progress": 2938,
+    Failed: 1380,
+    Published: 978,
   },
   {
     Month: "May",
-    Failed: 3890,
-    Completed: 2980,
-    "In Progress": 2645,
+    Failed: 1190,
+    Published: 1800,
   },
   {
     Month: "Jun",
     Failed: 1880,
-    Completed: 978,
-    "In Progress": 2938,
+    Published: 978,
   },
   {
     Month: "Jul",
-    Failed: 3890,
-    Completed: 2980,
-    "In Progress": 2645,
+    Failed: 1290,
+    Published: 790,
   },
   {
     Month: "Aug",
     Failed: 2300,
-    Completed: 800,
-    "In Progress": 2938,
+    Published: 800,
   },
   {
     Month: "Sep",
     Failed: 2350,
-    Completed: 1300,
-    "In Progress": 2645,
+    Published: 600,
   },
   {
     Month: "Oct",
     Failed: 2350,
-    Completed: 1300,
-    "In Progress": 2645,
+    Published: 800,
   },
   {
     Month: "Nov",
     Failed: 2350,
-    Completed: 1300,
-    "In Progress": 2645,
+    Published: 1200,
   },
   {
     Month: "Dec",
     Failed: 2350,
-    Completed: 1300,
-    "In Progress": 2645,
+    Published: 1100,
   },
 ];
 
@@ -94,37 +89,33 @@ export default function Bar() {
 
   return (
     <Card className="shadow-none">
-      <Title className="font-bold">Contents Statistics</Title>
+      <div className="flex justify-start">
+        <Title className="font-bold">Contents Statistics</Title>{" "}
+        <div className="font-bold ml-1">
+          <Badge color="pink">Coming soon</Badge>
+        </div>
+      </div>
       <div className="flex gap-2 mt-4 mb-2">
         <MultiSelect
           placeholder="All organizations"
           value={organizations}
           onValueChange={setOrganizations}
         >
-          <MultiSelectItem value="1">Genetera</MultiSelectItem>
-          <MultiSelectItem value="2">Vomaty</MultiSelectItem>
-          <MultiSelectItem value="3">Quintify</MultiSelectItem>
-          <MultiSelectItem value="4">FFCO</MultiSelectItem>
+          <MultiSelectItem value="1">Organization</MultiSelectItem>
         </MultiSelect>
         <MultiSelect
           placeholder="All projects"
           value={projects}
           onValueChange={setProjects}
         >
-          <MultiSelectItem value="1">Genetera</MultiSelectItem>
-          <MultiSelectItem value="2">Vomaty</MultiSelectItem>
-          <MultiSelectItem value="3">Quintify</MultiSelectItem>
-          <MultiSelectItem value="4">FFCO</MultiSelectItem>
+          <MultiSelectItem value="1">Project</MultiSelectItem>
         </MultiSelect>
         <MultiSelect
           placeholder="All platforms"
           value={organizations}
           onValueChange={setOrganizations}
         >
-          <MultiSelectItem value="1">Genetera</MultiSelectItem>
-          <MultiSelectItem value="2">Vomaty</MultiSelectItem>
-          <MultiSelectItem value="3">Quintify</MultiSelectItem>
-          <MultiSelectItem value="4">FFCO</MultiSelectItem>
+          <MultiSelectItem value="1">Platform</MultiSelectItem>
         </MultiSelect>
         <Select value={year} placeholder="Currect year" onValueChange={setYear}>
           <SelectItem value="2023">2023</SelectItem>
@@ -133,12 +124,12 @@ export default function Bar() {
           <SelectItem value="2020">2020</SelectItem>
         </Select>
       </div>
-      <LineChart
+      <AreaChart
         className="mt-4 h-80"
         data={data}
         index="Month"
-        categories={["Completed", "In Progress", "Failed"]}
-        colors={["emerald", "lime", "cyan"]}
+        categories={["Published", "Failed"]}
+        colors={["emerald", "cyan"]}
         valueFormatter={valueFormatter}
       />
     </Card>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-
+import { Toaster } from "react-hot-toast";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,7 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="dark">
-        <div>{children}</div>
+        <div>
+          {children}
+          <Toaster />
+        </div>
       </body>
     </html>
   );

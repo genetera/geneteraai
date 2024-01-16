@@ -59,7 +59,7 @@ const Modal = (props: IProps) => {
                     <div className="mt-3 text-center sm:mt-0  sm:text-left">
                       <Dialog.Title
                         as="h3"
-                        className="text-lg font-medium leading-6 text-brand-base"
+                        className="text-lg text-xl font-bold leading-6 text-brand-base"
                       >
                         {props.title}
                         <div className="absolute right-2 top-2 p-2">
@@ -70,7 +70,7 @@ const Modal = (props: IProps) => {
                       </Dialog.Title>
 
                       <div className="mt-2">
-                        <p className="text-sm text-brand-secondary">
+                        <p className="text-md text-brand-secondary ">
                           {props.description}
                         </p>
                       </div>

@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  web:
+    container_name: web
+    build:
+      context: .
+      target: dev
+      dockerfile: web/Dockerfile
+    volumes:
+        - ./web/:/app
+        - /app/node_modules
+        - /app/.next
+    ports:
+      - "3000:3000"

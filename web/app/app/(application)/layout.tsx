@@ -10,7 +10,9 @@ export default function DashboardLayout({
     <>
       <Navbar />
       <Sidebar />
-      <div className="sm:ml-64 pt-20 dark:bg-gray-800">{children}</div>
+      <div>
+        <div className="sm:ml-64 pt-20 dark:bg-gray-800">{children}</div>
+      </div>
     </>
   );
 }

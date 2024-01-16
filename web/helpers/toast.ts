@@ -1,13 +1,12 @@
-import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
-export const Toast = Swal.mixin({
-  toast: true,
-  position: "top-end",
-  showConfirmButton: false,
-  timer: 5000,
-  timerProgressBar: false,
-  didOpen: (toast) => {
-    toast.onmouseenter = Swal.stopTimer;
-    toast.onmouseleave = Swal.resumeTimer;
-  },
-});
+export const toastify = (message: {
+  icon: "success" | "error";
+  title: string;
+}) => {
+  toast[message.icon](message.title, {
+    duration: 6000,
+    position: "top-right",
+    className: "font-bold",
+  });
+};

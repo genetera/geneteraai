@@ -102,9 +102,9 @@ class SignInApiView(APIView):
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
-            is_correct_password = user.check_password(password)
+            correct_password = user.check_password(password)
 
-            if not is_correct_password:
+            if not correct_password:
                 # The password is incorrect
                 return Response(
                     {"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST

@@ -9,6 +9,7 @@ interface IProps {
   color?: "emerald" | "rose";
   className?: string;
   loading?: boolean;
+  disabled?: boolean;
   onClick?: () => void;
 }
 const ButtonPrimary = (props: IProps) => {
@@ -21,6 +22,7 @@ const ButtonPrimary = (props: IProps) => {
       onClick={props.onClick}
       size={props.size ? props.size : "sm"}
       loading={props.loading}
+      disabled={props.disabled}
     >
       {props.children}
     </Button>
