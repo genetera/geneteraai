@@ -10,7 +10,7 @@ interface IProps {
   register?: UseFormRegister<any>;
   error?: any;
   disabled?: boolean;
-  autoComplete: "on" | "off";
+  autoComplete?: "on" | "off";
   className?: string;
   placeholder?: string;
 }

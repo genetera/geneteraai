@@ -41,7 +41,7 @@ const Notifications = () => {
         {!isNotificationLoading && (
           <div className="mt-8">
             {notifications?.map((notification, indx) => (
-              <div className="lg:px-6 ">
+              <div className="lg:px-6 " key={indx}>
                 <h5 className="font-bold text-lg">{notification.title}</h5>
                 <p className="mt-2">{notification.message}</p>
                 <p className="mt-2 text-gray-600">{notification.created_at}</p>

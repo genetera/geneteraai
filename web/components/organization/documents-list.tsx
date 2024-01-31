@@ -95,7 +95,10 @@ const DocumentList = () => {
           <div className="mt-5 ">
             <Table headers={["Name", "Size", ""]}>
               {documents?.map((document, indx) => (
-                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr
+                  key={indx}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                >
                   <td className="px-6 py-4">
                     <div className="flex justify-start items-center cursor-pointer">
                       <div className="bg-black p-1 rounded flex justify-center items-center font-bold text-white w-5 h-5">

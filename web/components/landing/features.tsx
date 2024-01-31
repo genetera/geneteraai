@@ -12,7 +12,8 @@ export const Features: React.FC = () => {
     {
       icon: BriefcaseIcon,
       name: "Stay Focused",
-      description: "Keep your Slack workspace focused on what's important",
+      description:
+        "Keep your Slack workspace focused on what&lsquo;s important",
     },
     {
       icon: BriefcaseIcon,
@@ -42,8 +43,8 @@ export const Features: React.FC = () => {
                   Generate content with AI
                 </h3>
                 <p className="mb-8 text-lg text-zinc-700">
-                  Write exceptional copy with the world's most powerful AI text
-                  editor
+                  Write exceptional copy with the world&lsquo;s most powerful AI
+                  text editor
                 </p>
                 <dl className="max-w-xl grid grid-cols-1 gap-4 lg:max-w-none">
                   {features.map((feature) => (

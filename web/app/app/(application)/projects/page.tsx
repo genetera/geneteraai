@@ -201,7 +201,10 @@ const Projects = () => {
             <div className="mt-5 ">
               <Table headers={projectsHeaders}>
                 {projects?.map((project, indx) => (
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr
+                    key={indx}
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  >
                     <td className="px-6 py-4 font-bold text-black whitespace-nowrap dark:text-white">
                       {project.name}
                     </td>
