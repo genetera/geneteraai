@@ -33,9 +33,11 @@ SECRET_KEY = os.environ.get("SECRET_KEY", get_random_secret_key())
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG") == "TRUE"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "geneteraai.com",
+]
 
 BASE_URL = "http://localhost/"
 
@@ -64,7 +66,7 @@ INSTALLED_APPS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://genetera.com",
+    "https://geneteraai.com",
     "http://localhost:3000",
 ]
 
@@ -203,8 +205,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CELERY CONFIGURATIONS
 CELERY_TIMEZONE = TIME_ZONE
-CELERY_BROKER_URL = os.environ.get("REDIS_URL", "")
-CELERY_RESULT_BACKEND = os.environ.get("REDIS_URL", "")
+CELERY_BROKER_URL = os.environ.get("REDISCLOUD_URL", "")
+CELERY_RESULT_BACKEND = os.environ.get("REDISCLOUD_URL", "")
 CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TASK_SERIALIZER = "json"
