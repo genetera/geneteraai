@@ -15,6 +15,10 @@ export interface IGoogleLoginButton {
   styles?: CSSProperties;
 }
 
+declare const window: {
+  google: any;
+} & Window;
+
 export const GoogleLoginButton: FC<IGoogleLoginButton> = (props) => {
   const { handleSignIn } = props;
 
