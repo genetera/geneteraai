@@ -1,0 +1,3 @@
+web: gunicorn genetera.wsgi
+worker: celery -A genetera worker -l info
+beat: celery -A genetera beat -l INFO
