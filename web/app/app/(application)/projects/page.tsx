@@ -187,8 +187,8 @@ const Projects = () => {
             value={organizationFilter}
             onValueChange={setOrganizationFilter}
           >
-            {organizationList?.map((organization) => (
-              <MultiSelectItem value={organization.value}>
+            {organizationList?.map((organization, indx) => (
+              <MultiSelectItem value={organization.value} key={indx}>
                 {organization.title}
               </MultiSelectItem>
             ))}
