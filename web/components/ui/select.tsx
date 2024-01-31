@@ -34,7 +34,9 @@ const Select = (props: IProps) => {
       >
         <option value="">Select {props.name}</option>
         {props.options.map((option, indx) => (
-          <option value={option.value}>{option.title}</option>
+          <option key={indx} value={option.value}>
+            {option.title}
+          </option>
         ))}
       </select>
       {props.error?.message && (

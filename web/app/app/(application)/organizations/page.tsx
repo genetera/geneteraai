@@ -161,7 +161,10 @@ const Organizations = () => {
             <div className="mt-5 ">
               <Table headers={organizationsHeaders}>
                 {organizations?.map((organization, indx) => (
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 cursor-pointer hover:bg-slate-100">
+                  <tr
+                    key={indx}
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 cursor-pointer hover:bg-slate-100"
+                  >
                     <td className="px-6 py-4 font-bold text-black whitespace-nowrap dark:text-white">
                       {organization.name}
                     </td>
