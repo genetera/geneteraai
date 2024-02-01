@@ -237,14 +237,19 @@ OPEN_AI_API_KEY = os.environ.get("OPEN_AI_API_KEY")
 PINECONE_API_KEY = os.environ.get("PINECONE_API_KEY")
 PINECONE_ENV = os.environ.get("PINECONE_ENV")
 
-"""
-sentry_sdk.init(
-    dsn=os.environ.get("SENTRY_DSN"),
-    integrations=[DjangoIntegration()],
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
-    send_default_pii=True,
-    environment="local",
-    traces_sample_rate=0.7,
-)
-"""
+# Sentry errors in production
+if not DEBUG:
+    sentry_sdk.init(
+        dsn=os.environ.get("SENTRY_DSN"),
+        integrations=[DjangoIntegration()],
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True,
+        environment="local",
+        traces_sample_rate=0.7,
+    )
+
+# Configure Django App for Heroku.
+import django_heroku
+
+django_heroku.settings(locals())
