@@ -66,7 +66,7 @@ INSTALLED_APPS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://geneteraai.com",
+    "https://www.geneteraai.com",
     "http://localhost:3000",
 ]
 
