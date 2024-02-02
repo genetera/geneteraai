@@ -117,6 +117,9 @@ class ContentListApiView(APIView):
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
+            content_obj = serializer.save(created_by=request.user)
+            serialized_content = ContentSerializer(content_obj)
+
             # Generate content
 
             generator = ContentGenerator(
@@ -138,8 +141,6 @@ class ContentListApiView(APIView):
             )
 
             # ... Save Generated content to Genetera DB
-            content_obj = serializer.save(created_by=request.user)
-            serialized_content = ContentSerializer(content_obj)
             content_obj.content = answer
             content_obj.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
