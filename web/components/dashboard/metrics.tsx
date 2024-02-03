@@ -3,18 +3,18 @@ import { Card, Grid, Metric, Text, Flex } from "@tremor/react";
 const categories = [
   {
     title: "Organizations",
-    metric: 4,
-    createdByMe: 1,
+    metric: 0,
+    createdByMe: 0,
   },
   {
     title: "Contents",
-    metric: 230,
-    createdByMe: 10,
+    metric: 0,
+    createdByMe: 0,
   },
   {
     title: "Projects",
-    metric: 15,
-    createdByMe: 3,
+    metric: 0,
+    createdByMe: 0,
   },
 ];
 

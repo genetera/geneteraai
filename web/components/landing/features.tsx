@@ -1,29 +1,37 @@
 import Image from "next/image";
 
-import { BriefcaseIcon } from "@heroicons/react/24/outline";
+import {
+  BriefcaseIcon,
+  SparklesIcon,
+  CircleStackIcon,
+  UserGroupIcon,
+  CodeBracketIcon,
+} from "@heroicons/react/24/outline";
 
 export const Features: React.FC = () => {
   const features = [
     {
-      icon: BriefcaseIcon,
-      name: "Consolidate Events",
-      description: "Get all your event data in one place to reduce alert noise",
+      icon: SparklesIcon,
+      name: "AI content creation",
+      description: "Create content with the power of AI",
     },
     {
-      icon: BriefcaseIcon,
-      name: "Stay Focused",
+      icon: CircleStackIcon,
+      name: "Knowledge Base",
       description:
-        "Keep your Slack workspace focused on what&lsquo;s important",
+        "Upload and store information about your brand, so your content is always accurate",
     },
     {
-      icon: BriefcaseIcon,
-      name: "Customizable Settings",
-      description: "Customize your alert settings to suit your unique needs",
+      icon: UserGroupIcon,
+      name: "Team Collaboration",
+      description:
+        "Add members on project to work together with permissions in mind.",
     },
     {
-      icon: BriefcaseIcon,
-      name: "Clear Overview",
-      description: "Get a clear overview of all your alerts in one place",
+      icon: CodeBracketIcon,
+      name: "Open source",
+      description:
+        "GENETERA AI is proudly Open-source, released under the AGPL-3.0 license",
     },
   ];
   return (
@@ -40,25 +48,24 @@ export const Features: React.FC = () => {
               >
                 {/* Content #1 */}
                 <h3 className="pb-3 text-4xl font-bold  text-zinc-900">
-                  Generate content with AI
+                  AI-Powered content generator.
                 </h3>
                 <p className="mb-8 text-lg text-zinc-700">
-                  Write exceptional copy with the world&lsquo;s most powerful AI
-                  text editor
+                  Generate content with the world&lsquo;s most powerful AI .
                 </p>
                 <dl className="max-w-xl grid grid-cols-1 gap-4 lg:max-w-none">
                   {features.map((feature) => (
                     <div
                       key={feature.name}
-                      className="px-2 py-1 rounded group bg-zinc-100 hover:bg-zink-300 duration-500"
+                      className="p-3 rounded group bg-green-50 hover:bg-zink-300 duration-500"
                     >
                       <div className="flex items-center mb-1 space-x-2 ">
-                        <feature.icon className="w-4 h-4 shrink-0 text-zinc-900 group-hover:text-zinc-950 duration-500" />
-                        <h4 className="font-medium text-zinc-900 group-hover:text-zinc-950 duration-500">
+                        <feature.icon className="w-4 h-4 shrink-0 text-zinc-900 group-hover:text-zinc-950 duration-500 font-bold" />
+                        <h4 className="text-zinc-900 group-hover:text-zinc-950 duration-500 font-bold">
                           {feature.name}
                         </h4>
                       </div>
-                      <p className="text-sm text-left text-zinc-400 group-hover:text-zinc-950 duration-500">
+                      <p className="text-sm text-left text-zinc-800 group-hover:text-zinc-850 duration-500 font-medium">
                         {feature.description}
                       </p>
                     </div>

@@ -14,12 +14,15 @@ const FeatureSection = () => {
         />
         <div className="mt-4 md:mt-0">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-            Let&lsquo;s create more tools and ideas that brings us together.
+            Create viral content.
           </h2>
           <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
-            Flowbite helps you connect with friends and communities of people
-            who share your interests. Connecting with your friends and family as
-            well as discovering new ones is easy with features like Groups.
+            With Genetera AI, creating content is a seamless process that begins
+            by inputting your ideas and preferences. The platform generate
+            tailored and high-quality content based on your specifications. With
+            its user-friendly interface and customizable options, Genetera AI
+            empowers creators to effortlessly bring their visions to life in a
+            diverse range of formats.
           </p>
           <a
             href="#"
@@ -44,12 +47,16 @@ const FeatureSection = () => {
       <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
         <div className="mt-4 md:mt-0">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-            Let&lsquo;s create more tools and ideas that brings us together.
+            Genetera knowledge base.
           </h2>
           <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
-            Flowbite helps you connect with friends and communities of people
-            who share your interests. Connecting with your friends and family as
-            well as discovering new ones is easy with features like Groups.
+            Genetera AI facilitates content creation by enabling the integration
+            of your organization&lsquo;s data, ensuring a personalized and
+            precise output. Through seamless data incorporation, the AI
+            leverages relevant information to craft content that aligns
+            seamlessly with your brand&lsquo;s messaging and objectives. This
+            feature not only enhances accuracy but also empowers users to
+            generate content that resonates authentically with their audience.
           </p>
           <a
             href="#"
@@ -88,12 +95,14 @@ const FeatureSection = () => {
         />
         <div className="mt-4 md:mt-0">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-            Let&lsquo;s create more tools and ideas that brings us together.
+            Organized contents.
           </h2>
           <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
-            Flowbite helps you connect with friends and communities of people
-            who share your interests. Connecting with your friends and family as
-            well as discovering new ones is easy with features like Groups.
+            Genetera AI offers a user-friendly interface, simplifying the
+            management of your content creation process. Its intuitive design
+            allows users to efficiently navigate, edit, and organize their
+            generated content, enhancing overall user experience and
+            productivity.
           </p>
           <a
             href="#"

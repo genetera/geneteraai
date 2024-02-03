@@ -42,7 +42,7 @@ const Hero: React.FC = () => {
               <div className="relative inline-flex before:absolute before:inset-0 ">
                 <Link
                   className="px-3 py-1 text-sm font-medium inline-flex items-center justify-center border border-transparent rounded-full  text-black hover:text-zink-200 transition duration-150 ease-in-out w-full group  relative before:absolute before:inset-0 border-zinc-600 before:rounded-full before:pointer-events-none"
-                  href="https://github.com/genetera/genetera"
+                  href="https://github.com/genetera/geneteraai"
                   target="_blank"
                 >
                   <span className="relative inline-flex items-center">
@@ -66,7 +66,7 @@ const Hero: React.FC = () => {
               data-aos-delay="200"
             >
               Elevate productivity saving time in research, <br /> seamlessly
-              managing documents, and swiftly generating content.
+              managing documents, and swiftly generating content with AI.
             </p>
             <div
               className="flex flex-col items-center max-w-xs mx-auto gap-4 sm:max-w-none  sm:justify-center sm:flex-row sm:inline-flex"
