@@ -35,7 +35,7 @@ Meet [Genetera](https://geneteraai.com). An Open-Source AI-powered content gener
 ## 📸 Screenshots
 
 <p>
-    <a href="https://geneteraai.com" target="_blank">
+    <a href="https://geneteraai.com" target="_blank" style="padding:6px; background-color:#000000;">
       <img
         src="https://i.postimg.cc/C1Xt070B/contents.png"
         alt="Genetera AI content"
