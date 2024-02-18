@@ -21,7 +21,7 @@
 <p>
     <a href="https://geneteraai.com" target="_blank">
       <img
-        src="https://i.postimg.cc/5NqwcWhc/content.png"
+        src="https://i.postimg.cc/HWNs5gCk/geneterachat.jpg"
         alt="Genetera Screens"
         width="100%"
       />
