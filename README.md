@@ -21,7 +21,7 @@
 <p>
     <a href="https://geneteraai.com" target="_blank">
       <img
-        src="https://i.postimg.cc/5NqwcWhc/content.png"
+        src="https://i.postimg.cc/HWNs5gCk/geneterachat.jpg"
         alt="Genetera Screens"
         width="100%"
       />
@@ -32,44 +32,3 @@ Meet [Genetera](https://geneteraai.com). An Open-Source AI-powered content gener
 
 > Genetera is still in its early days, not everything will be perfect. Please let us know of any suggestions, ideas, or bugs that you encounter on GitHub issues, and we will use your feedback to improve.
 
-## 📸 Screenshots
-
-<p>
-    <a href="https://geneteraai.com" target="_blank">
-      <img
-        src="https://i.postimg.cc/C1Xt070B/contents.png"
-        alt="Genetera AI content"
-        width="100%"
-      />
-    </a>
-  </p>
-
-  <p>
-    <a href="https://geneteraai.com" target="_blank">
-      <img
-        src="https://i.postimg.cc/Y9hVTV5B/documents.png"
-        alt="Genetera AI content"
-        width="100%"
-      />
-    </a>
-  </p>
-
-  <p>
-    <a href="https://geneteraai.com" target="_blank">
-      <img
-        src="https://i.postimg.cc/WzZy1Zp9/projects.png"
-        alt="Genetera AI projects"
-        width="100%"
-      />
-    </a>
-  </p>
-
-  <p>
-    <a href="https://geneteraai.com" target="_blank">
-      <img
-        src="https://i.postimg.cc/5NqwcWhc/content.png"
-        alt="Genetera AI projects"
-        width="100%"
-      />
-    </a>
-  </p>
